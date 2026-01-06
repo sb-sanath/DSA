@@ -1,34 +1,4 @@
-#include <stdio.h>
-#include <stdint.h>
-#include <stdlib.h>
-
-#define NUM_OF_NODES 5
-
-struct single_linked_list{
-    int data;
-    struct single_linked_list *next;
-};
-
-struct single_linked_list * create_list(struct single_linked_list * head_ptr, int num_of_nodes)
-{
-    struct single_linked_list *new_node;
-    for(int i=0;i<num_of_nodes; i++) {
-        new_node = (struct single_linked_list *)malloc(sizeof(struct single_linked_list));
-        new_node->data = i+1;
-        head_ptr->next = new_node;
-        head_ptr = new_node;
-    }
-    head_ptr->next = NULL;
-}
-
-void print_list(struct single_linked_list * head_ptr)
-{
-    while(head_ptr != NULL){
-        printf("%d\t", head_ptr->data);
-        head_ptr = head_ptr->next;
-    }
-    printf("\n");
-}
+#include "linked_list.h"
 
 void print_list_in_reverse(struct single_linked_list * head_ptr)
 {
@@ -58,18 +28,37 @@ struct single_linked_list * reverse_list (struct single_linked_list * head)
 
 int main(void) 
 {
-    struct single_linked_list * head;
+    struct single_linked_list * list1_head;
+    struct single_linked_list * list2_head;
 
-    head = ( struct single_linked_list *)malloc(sizeof(struct single_linked_list));
+    list1_head = ( struct single_linked_list *)malloc(sizeof(struct single_linked_list));
+    list2_head = ( struct single_linked_list *)malloc(sizeof(struct single_linked_list));
 
-    create_list(head, NUM_OF_NODES);
-    print_list(head);
+    create_list(list1_head, LIST1_NUM_OF_NODES);
+    printf("List 1:\t");
+    print_list(list1_head);
 
+    create_list(list2_head, LIST2_NUM_OF_NODES);
+    printf("List 2:\t");
+    print_list(list2_head);
+/*
     printf("Printing in reverse:\n");
-    print_list_in_reverse(head);
+    print_list_in_reverse(list1_head);
     printf("\n");
+*/
+    list1_head = reverse_list(list1_head);
+    printf("Reversed list1:\t");
+    print_list(list1_head);
 
-    head = reverse_list(head);
-    print_list(head);
+    list2_head = reverse_list(list2_head);
+    printf("Reversed list2:\t");
+    print_list(list2_head);
+
+    merge_list(list1_head, list2_head);
+    printf("Merged List 1:\t");
+    print_list(list1_head);
+
+    printf("Merged List 2:\t");
+    print_list(list2_head);
 
 }
