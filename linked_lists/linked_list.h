@@ -14,3 +14,6 @@ struct single_linked_list{
 struct single_linked_list * create_list(struct single_linked_list * head_ptr, int num_of_nodes);
 void print_list(struct single_linked_list * head_ptr);
 void merge_list(struct single_linked_list * to_be_merged, struct single_linked_list * merged_into);
+struct single_linked_list * reverse_list (struct single_linked_list * head);
+void create_cycle_list(struct single_linked_list * head, int length);
+void cycle_detect(struct single_linked_list * head);

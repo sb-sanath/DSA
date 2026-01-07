@@ -37,3 +37,33 @@ void merge_list(struct single_linked_list * to_be_merged, struct single_linked_l
     }
     to_be_merged->next = merged_into;
 }
+
+void create_cycle_list(struct single_linked_list * head, int length)
+{
+    int cycle_position;
+    int position = 0;
+    struct single_linked_list * last_node;
+
+
+    //srand(time(NULL));
+
+    cycle_position = 3;
+    printf("cycle_position = %d", cycle_position);
+    if (head == NULL){
+        printf("%s head is NULL", __func__);
+    }
+    last_node = head;
+
+    while(last_node->next != NULL) {
+        last_node = last_node->next;
+    }
+
+    while(position < cycle_position){
+        head = head->next;
+        position ++;
+    }
+
+    last_node->next = head;
+
+    printf("Cyclical list created.");
+}
